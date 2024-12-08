@@ -17,13 +17,13 @@
         <nav>
             <a href="{% url 'main_app:home_view' %}#about">About</a>
             <div>
-                <a href="{% url 'homes:home_list_view' %}">Homes</a>
+                <a href="{% url 'homes:home_list' %}">Homes</a>
                 <div class="dropdown">
                     <a href="{% url 'repairs:repair_list_view' %}">Repair Services</a>
                     <a href="{% url 'furniture:shop_list_view' %}">Furniture Shops</a>
                 </div>
             </div>
-            <a href="{% url 'designers:designer_list_view' %}">Designers</a>
+            <a href="{% url 'designers:designers_list_view' %}">Designers</a>
             <a href="{% url 'main_app:contact_view' %}">Contact Us</a>
             <a href="#">Login</a>
         </nav>

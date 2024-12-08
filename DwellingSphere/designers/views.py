@@ -1,11 +1,26 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Designer
 
-def designer_list_view(request):
-    designers = Designer.objects.all()
-    return render(request, 'designers/designer_list.html', {'designers': designers})
+def add_designer_view(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        bio = request.POST['bio']
+        contact_info = request.POST['contact_info']
+        img = request.FILES.get('img')
 
-def designer_detail_view(request, designer_id):
-    designer = Designer.objects.get(id=designer_id)
-    return render(request, 'designers/designer_detail.html', {'designer': designer})
+        new_designer = Designer(
+            name=name,
+            bio=bio,
+            contact_info=contact_info,
+            img=img
+        )
+        new_designer.save()
+        return redirect('designers:designer_list_view')  # Adjust to your URL name
+
+    return render(request, 'designers/add_designer.html')
+
+
+def designers_list_view(request):
+    designers = Designer.objects.all()  # Fetch all designer objects
+    return render(request, 'designers/designer_list.html', {'designers': designers})
 

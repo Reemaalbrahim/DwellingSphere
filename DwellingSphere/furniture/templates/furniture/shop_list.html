@@ -1,0 +1,69 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+
+{% block title %}Furniture Shops List{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #abb8c4;
+        color: #2f3a42;
+    }
+
+    .shops-list-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .shop-card {
+        background-color: #f2f2f2;
+        color: #000;
+        margin: 10px;
+        padding: 20px;
+        border-radius: 5px;
+        width: 80%;
+        max-width: 600px;
+        display: flex;
+        align-items: center;
+    }
+
+    .shop-card img {
+        max-width: 100px;
+        border-radius: 5px;
+        margin-right: 20px;
+    }
+
+    .shop-details {
+        flex-grow: 1;
+    }
+
+    .shop-name {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    .shop-description {
+        margin-top: 10px;
+    }
+</style>
+
+<div class="shops-list-container">
+    <h2>Furniture Shops List</h2>
+    {% for shop in shops %}
+    <div class="shop-card">
+        {% if shop.img %}
+            <img src="{{ shop.img.url }}" alt="{{ shop.name }}">
+        {% endif %}
+        <div class="shop-details">
+            <div class="shop-name">{{ shop.name }}</div>
+            <div class="shop-description">{{ shop.description }}</div>
+            <div class="shop-contact">Contact: {{ shop.contact_info }}</div>
+        </div>
+    </div>
+    {% empty %}
+        <p>No furniture shops available.</p>
+    {% endfor %}
+</div>
+{% endblock %}

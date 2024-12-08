@@ -1,0 +1,69 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+
+{% block title %}Repair Services List{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #abb8c4;
+        color: #2f3a42;
+    }
+
+    .services-list-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .service-card {
+        background-color: #f2f2f2;
+        color: #000;
+        margin: 10px;
+        padding: 20px;
+        border-radius: 5px;
+        width: 80%;
+        max-width: 600px;
+        display: flex;
+        align-items: center;
+    }
+
+    .service-card img {
+        max-width: 100px;
+        border-radius: 5px;
+        margin-right: 20px;
+    }
+
+    .service-details {
+        flex-grow: 1;
+    }
+
+    .service-name {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    .service-description {
+        margin-top: 10px;
+    }
+</style>
+
+<div class="services-list-container">
+    <h2>Repair Services List</h2>
+    {% for service in services %}
+    <div class="service-card">
+        {% if service.img %}
+            <img src="{{ service.img.url }}" alt="{{ service.name }}">
+        {% endif %}
+        <div class="service-details">
+            <div class="service-name">{{ service.name }}</div>
+            <div class="service-description">{{ service.description }}</div>
+            <div class="service-contact">Contact: {{ service.contact_info }}</div>
+        </div>
+    </div>
+    {% empty %}
+        <p>No repair services available.</p>
+    {% endfor %}
+</div>
+{% endblock %}

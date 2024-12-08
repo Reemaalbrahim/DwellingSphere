@@ -1,0 +1,69 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+
+{% block title %}Designers List{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #abb8c4;
+        color: #2f3a42;
+    }
+
+    .designers-list-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .designer-card {
+        background-color: #f2f2f2;
+        color: #000;
+        margin: 10px;
+        padding: 20px;
+        border-radius: 5px;
+        width: 80%;
+        max-width: 600px;
+        display: flex;
+        align-items: center;
+    }
+
+    .designer-card img {
+        max-width: 100px;
+        border-radius: 50%;
+        margin-right: 20px;
+    }
+
+    .designer-details {
+        flex-grow: 1;
+    }
+
+    .designer-name {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    .designer-bio {
+        margin-top: 10px;
+    }
+</style>
+
+<div class="designers-list-container">
+    <h2>Designers List</h2>
+    {% for designer in designers %}
+    <div class="designer-card">
+        {% if designer.img %}
+            <img src="{{ designer.img.url }}" alt="{{ designer.name }}">
+        {% endif %}
+        <div class="designer-details">
+            <div class="designer-name">{{ designer.name }}</div>
+            <div class="designer-bio">{{ designer.bio }}</div>
+            <div class="designer-contact">Contact: {{ designer.contact_info }}</div>
+        </div>
+    </div>
+    {% empty %}
+        <p>No designers available.</p>
+    {% endfor %}
+</div>
+{% endblock %}

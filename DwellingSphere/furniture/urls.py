@@ -1,9 +1,10 @@
-from . import views
 from django.urls import path
+from . import views
 
-app_name = "furniture"
+app_name = 'furniture'  # Namespace for the app
 
 urlpatterns = [
-    path('', views.shop_list_view, name='shop_list_view'),
-    path('<int:shop_id>/', views.shop_detail_view, name='shop_detail_view'),
+    path('add/', views.add_shop_view, name='add_shop_view'),  # URL for adding a new furniture shop
+    path('list/', views.shop_list_view, name='shop_list_view'),  # URL for viewing the list of furniture shops
 ]
+

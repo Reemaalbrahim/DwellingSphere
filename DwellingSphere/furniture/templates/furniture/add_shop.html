@@ -1,0 +1,94 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+
+{% block title %}Add Furniture Shop{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #abb8c4;
+        color:#2f3a42 ;
+    }
+
+    .shop-form-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 100px);
+        padding: 20px; /* Added padding for better spacing */
+    }
+
+    .shop-form {
+        width: 70%; /* Reduced width */
+        max-width: 500px; /* Reduced max-width */
+        padding: 20px; /* Reduced padding */
+        background-color: #f2f2f2;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
+    }
+
+    .shop-form input[type=text], 
+    .shop-form textarea {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #002352;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .shop-form input[type=file] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #002352;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .shop-form button {
+        background-color: #d5820f;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .shop-form button:hover {
+        background-color: #7b98c0;
+    }
+
+    .contact-welcome-text {
+        margin-bottom: 20px; /* Added margin to move title down */
+    }
+</style>
+
+<div class="shop-form-container">
+    <div class="contact-welcome-text">
+        <h2>Add New Furniture Shop</h2>
+    </div>
+    <form class="shop-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <label for="name">Shop Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter shop name" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" placeholder="Enter shop description" required></textarea>
+
+        <label for="contact_info">Contact Info:</label>
+        <input type="text" id="contact_info" name="contact_info" placeholder="Enter contact information" required>
+
+        <label for="image">Image:</label>
+        <input type="file" id="image" name="img" required>
+
+        <button type="submit">Add Shop</button>
+    </form>
+</div>
+{% endblock %}

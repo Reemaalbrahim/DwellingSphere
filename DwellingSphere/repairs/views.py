@@ -1,11 +1,27 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import RepairService
 
-def repair_list_view(request):
-    repairs = RepairService.objects.all()
-    return render(request, 'repairs/repair_list.html', {'repairs': repairs})
+def add_service_view(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        description = request.POST['description']
+        contact_info = request.POST['contact_info']
+        img = request.FILES.get('img')
 
-def repair_detail_view(request, repair_id):
-    repair = RepairService.objects.get(id=repair_id)
-    return render(request, 'repairs/repair_detail.html', {'repair': repair})
+        new_service = RepairService(
+            name=name,
+            description=description,
+            contact_info=contact_info,
+            img=img
+        )
+        new_service.save()
+        return redirect('repair:repair_list_view')  # Adjust to your URL name
+
+    return render(request, 'repairs/add_service.html')
+
+
+def repair_list_view(request):
+    services = RepairService.objects.all()  # Fetch all repair service objects
+    return render(request, 'repairs/repair_list.html', {'services': services})
+
 
