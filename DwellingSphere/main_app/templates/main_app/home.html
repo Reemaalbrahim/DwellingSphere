@@ -1,10 +1,152 @@
 {% extends 'main_app/base.html' %}
 
-{% block title %}Welcome to DwellingSphere{% endblock %}
-
 {% block content %}
-<div style="background-image: url('{% static 'images/background.jpg' %}'); height: 100vh; background-size: cover; color: white;">
-    <h2>Welcome to DwellingSphere</h2>
-    <p>Your one-stop solution for all your dwelling needs.</p>
+
+<style>
+    .home-background {
+        background-image: url('/static/images/b.jpeg');
+        background-size: cover; /* Cover the entire area */
+        background-position: center; /* Center the image */
+        color: #f2f8f3;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center; /* Center content horizontally */
+        align-items: center; /* Center content vertically */
+        height: 100vh; /* Full viewport height */
+        position: relative; /* Allow absolute positioning of children */
+        flex-direction: column; /* Stack elements vertically */
+        margin-bottom: 100px;
+    }
+
+    .static-info {
+        padding: 5px; /* Add padding for spacing */
+        color: #cccfd2; /* Adjust text color for better readability */
+        margin-top: -100px; /* Space between sections */
+        font-family: 'Roboto', sans-serif; /* Change the font family */
+        text-align: center; /* Center text */
+        background-color: #2f3a42;
+    }
+
+    .explore-button {
+        display: inline-block; /* Make it inline-block to allow padding */
+        padding: 12px 24px; /* Padding for the button */
+        background-color: #c96e19c8; /* Button color */
+        color: white; /* Text color */
+        text-decoration: none; /* Remove underline */
+        margin-top: 5px; /* Space above the button */
+        margin-bottom: 40px;
+        font-size: 16px; /* Font size */
+        transition: background-color 0.3s, transform 0.3s; /* Transition effects */
+        border: none; /* No border */
+    }
+
+    .about-section {
+        text-align: center;
+        margin: 50px 0;
+    }
+
+    .about-section h2 {
+        color: #2f3a42;
+        margin-bottom: 20px;
+        margin-top: 90px;
+    }
+
+    .about-section h3 {
+        color: #2f3a42;
+        margin-top: 100px;
+        font-size: 140%;
+    }
+
+    .about-section h4 {
+        color: #63330a;
+    }
+
+    .services {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        margin-top: 40px;
+    }
+
+    .service-box {
+        background: #556e8068;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin: 10px;
+        text-align: center;
+        width: 200px; /* Fixed width for service boxes */
+    }
+
+    .service-box a {
+        display: block; /* Make the anchor a block element */
+        text-decoration: none; /* Remove underline */
+    }
+
+    .service-box img {
+        width: 200px; /* Set a fixed width */
+        height: 230px; /* Set a fixed height */
+        object-fit: cover; /* Ensure the image covers the box without distortion */
+        border-radius: 5px;
+        transition: transform 0.3s; /* Transition for hover effect */
+    }
+
+    .service-box img:hover {
+        transform: scale(1.05); /* Scale image on hover */
+    }
+
+    .service-box h3 {
+        margin: 15px 0 10px 0;
+        color: #2f3a42;
+    }
+</style>
+
+<div class="home-background">
 </div>
+<div class="static-info">
+    <h2>Your one-stop solution for all your dwelling needs</h2>
+    <a href="#" class="explore-button">Explore more!</a>
+</div>
+
+<div class="about-section"id="about">
+    <h2>About DwellingSphere</h2>
+    <h4>At DwellingSphere, we believe that your home is more than just a place to live, it's a sanctuary where memories are made, dreams are nurtured, and life unfolds.</h4>
+    <h4>Our mission is to connect you with the best resources to create, enhance, and maintain your ideal living space.</h4>
+
+    <h3>What We Provide</h3>
+    
+    <div class="services">
+        <div class="service-box">
+            <a href="{% url 'homes:home_list_view' %}">
+                <img src="/static/images/1.png" alt="Comprehensive Home Listings">
+                <h3>Home Listings</h3>
+            </a>
+        </div>
+        <div class="service-box">
+            <a href="{% url 'designers:designer_list_view' %}">
+                <img src="/static/images/2.jpg" alt="Expert Designers">
+                <h3>Expert Designers</h3>
+            </a>
+        </div>
+        <div class="service-box">
+            <a href="{% url 'repairs:repair_list_view' %}">
+                <img src="/static/images/3.jpg" alt="Reliable Repair Services">
+                <h3>Repair Services</h3>
+            </a>
+        </div>
+        <div class="service-box">
+            <a href="{% url 'furniture:shop_list_view' %}">
+                <img src="/static/images/44.jpg" alt="Furniture Solutions">
+                <h3>Furniture Stores</h3>
+            </a>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
+
+
+
+
+

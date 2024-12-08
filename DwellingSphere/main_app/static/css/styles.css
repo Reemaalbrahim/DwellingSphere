@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #abb8c4;
+}
+
+header {
+    background: #abb8c4; /* Change header color to white */
+    color: #000000; /* Change text color to black */
+    padding: 10px 20px; /* Add padding for better spacing */
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space between logo and nav */
+    align-items: center; /* Center items vertically */
+    margin-bottom: -20px;
+}
+
+header h1 {
+    margin: 0; /* Remove default margin */
+}
+
+header h1 img {
+    height: 60px; /* Make logo a bit bigger */
+    margin-right: 15px; /* Add some space to the right */
+}
+
+header nav {
+    display: flex; /* Use flexbox for navigation links */
+    align-items: center; /* Center nav items vertically */
+}
+
+header nav a {
+    color: #000000; /* Change link color to black */
+    margin: 0 15px; /* Space between links */
+    text-decoration: none; /* Remove underline */
+}
+
+nav {
+    position: relative; /* Positioning for dropdown */
+        }
+
+        
+
+        .dropdown {
+            display: none; /* Hide dropdown by default */
+            position: absolute; /* Position it below the Homes link */
+            background-color: rgba(87, 107, 128, 0.842); /* Gray background for dropdown */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for dropdown */
+            z-index: 1; /* Ensure it appears above other content */
+            padding: 10px 0; /* Vertical padding */
+        }
+
+        .dropdown a {
+            display: block; /* Make links block elements for vertical stacking */
+            padding: 10px 15px; /* Spacing for dropdown links */
+            text-decoration: none; /* Remove underline */
+            color: white; /* Text color for dropdown links */
+            transition: background-color 0.3s; /* Transition for hover */
+        }
+
+        .dropdown a:hover {
+            background-color: #83a8ca; /* Darker gray on hover */
+        }
+
+        nav a {
+            padding: 10px 15px; /* Spacing for main links */
+            text-decoration: none; /* Remove underline */
+            color: #333; /* Link color */
+            transition: background-color 0.3s; /* Transition for hover */
+        }
+
+        nav a:hover {
+            background-color: #83a8ca; /* Background on hover */
+        }
+
+        /* Show dropdown on hover over the Homes link */
+        nav div:hover .dropdown {
+            display: block; /* Show dropdown */
+        }
+   
+
+
+main {
+    padding: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background: #ffffff;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background: #35424a;
+    color: #ffffff;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+
