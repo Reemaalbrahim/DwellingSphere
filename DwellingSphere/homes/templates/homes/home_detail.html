@@ -1,1 +1,76 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+
+{% block title %}Home Details{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #abb8c4;
+        display: flex;
+        flex-direction: column; /* Stack elements vertically */
+        padding: 20px; /* Add padding for better spacing */
+    }
+
+    .home-list-container {
+        display: flex;
+        justify-content: center; /* Center the card */
+        align-items: center; /* Align items at the center */
+        width: 100%; /* Full width for the container */
+    }
+
+    .home-card {
+        background-color: rgb(217, 219, 224);
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 15px;
+        margin: 10px; /* Margin around the card */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        width: 500px; /* Increased width for larger cards */
+        height: 550px;
+        box-sizing: border-box; /* Include padding and border in width */
+        text-align: center; /* Center text inside the card */
+    }
+
+    .home-card img {
+        width: 100%; /* Set width to 100% to fill the card */
+        height: 300px; /* Increased height for uniformity */
+        object-fit: cover; /* Maintain aspect ratio and cover the area */
+        border-radius: 5px;
+        margin-bottom: 15px; /* Space below the image */
+    }
+
+    .home-details {
+        margin-top: 10px;
+    }
+
+    .home-details h3 {
+        margin: 0; /* Remove margin for consistency */
+    }
+
+    .home-details p {
+        margin: 5px 0; /* Space between paragraphs */
+    }
+</style>
+
+<div class="home-list-container">
+    <div class="home-card">
+        {% if home.img %}
+            <img src="{{ home.img.url }}" alt="{{ home.title }}">
+        {% endif %}
+        <div class="home-details">
+            <h3>{{ home.title }}</h3>
+            <p><strong>Price:</strong> ${{ home.price }}</p>
+            <p><strong>Location:</strong> {{ home.location }}</p>
+            <p><strong>Size:</strong> {{ home.size }} sq ft</p>
+            <p><strong>Bedrooms:</strong> {{ home.bedrooms }}</p>
+            <p><strong>Bathrooms:</strong> {{ home.bathrooms }}</p>
+            <p><strong>Contact:</strong> {{ home.contact }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
 

@@ -7,6 +7,8 @@
 <style>
     body {
         background-color: #abb8c4;
+        display: flex;
+        flex-direction: column; /* Stack elements vertically */
     }
 
     .home-list-container {
@@ -14,16 +16,51 @@
         display: flex;
         flex-wrap: wrap; /* Allows wrapping of cards */
         justify-content: space-between; /* Space between cards */
+        align-items: flex-start; /* Align items at the top */
+        text-align: center; /* Center text for cards */
+        width: 100%; /* Full width for the home list */
+    }
+
+    h2 {
+        width: 100%; /* Full width for centering */
+        margin-bottom: 20px; /* Space below the heading */
+        text-align: center; /* Center text for cards */
+
+    }
+
+    .filter-container {
+        display: flex; /* Use flexbox for centering */
+        justify-content: center; /* Center the filter elements */
+        margin: 20px 0; /* Space above and below the filter */
+        width: 100%; /* Full width for the filter bar */
+    }
+
+    .filter-container select,
+    .filter-container button {
+        padding: 10px;
+        margin: 0 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .filter-container button {
+        background-color: #343b42; /* Button color */
+        color: white;
+        cursor: pointer;
+    }
+
+    .filter-container button:hover {
+        background-color: #343b42; /* Darker button color on hover */
     }
 
     .home-card {
-        background-color: white;
+        background-color: #343b42c5;
         border: 1px solid #ccc;
         border-radius: 5px;
         padding: 15px;
-        margin: 10px;
+        margin: 15px; /* Increased margin for more space */
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        width: calc(33.33% - 20px); /* 3 cards per row with margin accounted */
+        width: calc(33.33% - 30px); /* Adjusted for increased margin */
         box-sizing: border-box; /* Include padding and border in width */
         transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
     }
@@ -35,48 +72,125 @@
 
     .home-card img {
         width: 100%; /* Set width to 100% to fill the card */
-        height: 200px; /* Fixed height for uniformity */
+        height: 300px; /* Fixed height for uniformity */
         object-fit: cover; /* Maintain aspect ratio and cover the area */
         border-radius: 5px;
     }
 
     .home-details {
         margin-top: 10px;
+        color: rgb(184, 189, 195);
     }
 
     .home-details h3 {
         margin: 0;
+        color: aliceblue;
+        
     }
 
     .home-details p {
         margin: 5px 0;
     }
+
+    /* New styles to remove underline and set color */
+    a {
+        text-decoration: none; /* Remove underline */
+        color: black; /* Set text color to black */
+    }
+
+    /* Pagination styles */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+    }
+
+    .pagination a {
+        margin: 0 5px;
+        padding: 10px 15px;
+        border: 1px solid #343b42;
+        color: #343b42;
+        border-radius: 5px;
+    }
+
+    .pagination a:hover {
+        background-color: #686a6d;
+        color: white;
+    }
 </style>
 
+<h2>Available Homes</h2>
+
+<div class="filter-container">
+    <form method="GET" action="">
+        <select name="location">
+            <option value="">Select Location</option>
+            <option value="Saudi Arabia, Riyadh">Riyadh</option>
+            <option value="Khobar">Khobar</option>
+            <option value="Jeddah">Jeddah</option>
+            <option value="Al-Ahsa">Al-Ahsa</option>
+            <option value="Al-madinah al-munawwarah">Al-madinah al-munawwarah</option>
+        </select>
+
+        <select name="title">
+            <option value="">Select Home Type</option>
+            <option value="Villa">Villa</option>
+            <option value="Duplex">Duplex</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Townhouse">Townhouse</option>
+            <option value="Bungalow">Bungalow</option>
+        </select>
+
+        <button type="submit">Filter</button>
+    </form>
+</div>
+
 <div class="home-list-container">
-    <h2>Available Homes</h2>
-    {% if homes %}
-        {% for home in homes %}
+    {% if page_obj %}
+        {% for home in page_obj %}
             <div class="home-card">
-                {% if home.img %}
-                    <img src="{{ home.img.url }}" alt="{{ home.title }}">
-                {% endif %}
-                <div class="home-details">
-                    <h3>{{ home.title }}</h3>
-                    <p><strong>Price:</strong> ${{ home.price }}</p>
-                    <p><strong>Location:</strong> {{ home.location }}</p>
-                    <p><strong>Size:</strong> {{ home.size }} sq ft</p>
-                    <p><strong>Bedrooms:</strong> {{ home.bedrooms }}</p>
-                    <p><strong>Bathrooms:</strong> {{ home.bathrooms }}</p>
-                    <p><strong>Contact: </strong>{{ home.contact }}</p>
-                </div>
+                <a href="{% url 'homes:home_detail' home.id %}">
+                    {% if home.img %}
+                        <img src="{{ home.img.url }}" alt="{{ home.title }}">
+                    {% endif %}
+                    <div class="home-details">
+                        <h3>{{ home.title }}</h3>
+                        <p><strong>Location:</strong> {{ home.location }}</p>
+                    </div>
+                </a>
             </div>
         {% endfor %}
     {% else %}
         <p>No homes available at the moment.</p>
     {% endif %}
 </div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">1</a>
+         
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">1</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">2</a>
+        {% endif %}
+    </span>
+</div>
 {% endblock %}
+
+
+
+
+
+
+
+
 
 
 
