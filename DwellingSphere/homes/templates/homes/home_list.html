@@ -11,6 +11,9 @@
 
     .home-list-container {
         padding: 20px;
+        display: flex;
+        flex-wrap: wrap; /* Allows wrapping of cards */
+        justify-content: space-between; /* Space between cards */
     }
 
     .home-card {
@@ -18,13 +21,22 @@
         border: 1px solid #ccc;
         border-radius: 5px;
         padding: 15px;
-        margin: 10px 0;
+        margin: 10px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        width: calc(33.33% - 20px); /* 3 cards per row with margin accounted */
+        box-sizing: border-box; /* Include padding and border in width */
+        transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+    }
+
+    .home-card:hover {
+        transform: translateY(-5px); /* Slightly lift the card */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
     }
 
     .home-card img {
-        max-width: 100%;
-        height: auto;
+        width: 100%; /* Set width to 100% to fill the card */
+        height: 200px; /* Fixed height for uniformity */
+        object-fit: cover; /* Maintain aspect ratio and cover the area */
         border-radius: 5px;
     }
 
@@ -56,7 +68,7 @@
                     <p><strong>Size:</strong> {{ home.size }} sq ft</p>
                     <p><strong>Bedrooms:</strong> {{ home.bedrooms }}</p>
                     <p><strong>Bathrooms:</strong> {{ home.bathrooms }}</p>
-                    <p>{{ home.description }}</p>
+                    <p><strong>Contact: </strong>{{ home.contact }}</p>
                 </div>
             </div>
         {% endfor %}
@@ -65,5 +77,8 @@
     {% endif %}
 </div>
 {% endblock %}
+
+
+
 
 

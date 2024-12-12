@@ -4,7 +4,7 @@ from .models import Home
 def add_home(request):
     if request.method == 'POST':
         title = request.POST['title']
-        description = request.POST['description']
+        contact = request.POST['contact']
         price = request.POST['price']
         location = request.POST['location']
         size = request.POST['size']
@@ -14,7 +14,7 @@ def add_home(request):
 
         new_home = Home(
             title=title,
-            description=description,
+            contact=contact,
             price=price,
             location=location,
             size=size,
@@ -23,7 +23,7 @@ def add_home(request):
             img=img
         )
         new_home.save()
-        return redirect('homes:home_list_view')  # Adjust to your URL name
+        return redirect('homes:home_list')  # Adjust to your URL name
 
     return render(request, 'homes/add_home.html')
 
