@@ -70,7 +70,7 @@
     }
 
     .service-box {
-        background: #556e8068;
+        background: #2f3a42;
         border-radius: 10px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         padding: 20px;
@@ -98,7 +98,8 @@
 
     .service-box h3 {
         margin: 15px 0 10px 0;
-        color: #2f3a42;
+        color: #e8ebed;
+        font-size: 18px;
     }
 </style>
 
@@ -106,7 +107,7 @@
 </div>
 <div class="static-info">
     <h2>Your one-stop solution for all your dwelling needs</h2>
-    <a href="#" class="explore-button">Explore more!</a>
+    <a href="{% url 'homes:home_list' %}" class="explore-button">Explore more!</a>
 </div>
 
 <div class="about-section"id="about">

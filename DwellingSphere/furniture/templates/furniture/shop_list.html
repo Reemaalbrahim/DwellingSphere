@@ -17,20 +17,30 @@
         padding: 20px;
     }
 
+    .shops-grid {
+        display: flex;
+        flex-wrap: wrap; /* Allow wrapping to the next line */
+        justify-content: center; /* Center the cards */
+        width: 100%; /* Full width for the grid */
+    }
+
     .shop-card {
-        background-color: #f2f2f2;
+        background-color: #abb8c4;
         color: #000;
         margin: 10px;
         padding: 20px;
         border-radius: 5px;
-        width: 80%;
+        width: calc(50% - 20px); /* Width for two cards in a row */
         max-width: 600px;
         display: flex;
         align-items: center;
+        box-sizing: border-box; /* Include padding and border in width */
     }
 
     .shop-card img {
-        max-width: 100px;
+        width: 150px; /* Fixed width */
+        height: 150px; /* Fixed height */
+        object-fit: cover; /* Maintain aspect ratio and fill the box */
         border-radius: 5px;
         margin-right: 20px;
     }
@@ -47,23 +57,43 @@
     .shop-description {
         margin-top: 10px;
     }
+
+    .shop-contact {
+        margin-top: 20px; /* Increased space above contact info */
+    }
+
+    .shop-contact a {
+        color: #2f3a42; /* Link color */
+        text-decoration: none; /* Remove underline */
+    }
+
+    .shop-contact a:hover {
+        text-decoration: underline; /* Underline on hover */
+    }
 </style>
 
 <div class="shops-list-container">
     <h2>Furniture Shops List</h2>
-    {% for shop in shops %}
-    <div class="shop-card">
-        {% if shop.img %}
-            <img src="{{ shop.img.url }}" alt="{{ shop.name }}">
-        {% endif %}
-        <div class="shop-details">
-            <div class="shop-name">{{ shop.name }}</div>
-            <div class="shop-description">{{ shop.description }}</div>
-            <div class="shop-contact">Contact: {{ shop.contact_info }}</div>
+    <div class="shops-grid">
+        {% for shop in shops %}
+        <div class="shop-card">
+            {% if shop.img %}
+                <img src="{{ shop.img.url }}" alt="{{ shop.name }}">
+            {% endif %}
+            <div class="shop-details">
+                <div class="shop-name">{{ shop.name }}</div>
+                <div class="shop-description">{{ shop.description }}</div>
+                <div class="shop-contact">
+                    <a href="{{ shop.contact_info }}" target="_blank">{{ shop.contact_info }}</a>
+                </div>
+            </div>
         </div>
+        {% empty %}
+            <p>No furniture shops available.</p>
+        {% endfor %}
     </div>
-    {% empty %}
-        <p>No furniture shops available.</p>
-    {% endfor %}
 </div>
 {% endblock %}
+
+
+

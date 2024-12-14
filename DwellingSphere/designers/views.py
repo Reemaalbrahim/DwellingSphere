@@ -15,7 +15,7 @@ def add_designer_view(request):
             img=img
         )
         new_designer.save()
-        return redirect('designers:designer_list_view')  # Adjust to your URL name
+        return redirect('designers:designers_list_view')  # Adjust to your URL name
 
     return render(request, 'designers/add_designer.html')
 

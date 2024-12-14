@@ -1,7 +1,7 @@
 {% extends 'main_app/base.html' %}
 {% load static %}
 
-{% block title %}Designers List{% endblock %}
+{% block title %}Interior Designers{% endblock %}
 
 {% block content %}
 <style>
@@ -17,21 +17,30 @@
         padding: 20px;
     }
 
+    .designers-grid {
+        display: flex;
+        flex-wrap: wrap; /* Allow wrapping to the next line */
+        justify-content: center; /* Center the cards */
+        width: 100%; /* Full width for the grid */
+    }
+
     .designer-card {
-        background-color: #f2f2f2;
-        color: #000;
+        background-color: #343b423b;
+        color: #343b42c5;
         margin: 10px;
         padding: 20px;
         border-radius: 5px;
-        width: 80%;
+        width: calc(33% - 20px); /* Width for three cards in a row */
         max-width: 600px;
         display: flex;
         align-items: center;
+        box-sizing: border-box; /* Include padding and border in width */
     }
 
     .designer-card img {
-        max-width: 100px;
-        border-radius: 50%;
+        width: 130px; /* Fixed width for uniformity */
+        height: 150px; /* Fixed height for uniformity */
+       
         margin-right: 20px;
     }
 
@@ -42,28 +51,49 @@
     .designer-name {
         font-size: 1.5em;
         font-weight: bold;
+        color: #2f3a42;
     }
 
     .designer-bio {
         margin-top: 10px;
     }
+
+    .designer-contact {
+        margin-top: 15px; /* Increased space above contact info */
+        color: #2f3a42
+    }
+
+    .designer-contact a {
+        color: #2f3a42; /* Link color */
+        text-decoration: none; /* Remove underline */
+    }
+
+    .designer-contact a:hover {
+        text-decoration: underline; /* Underline on hover */
+    }
 </style>
 
 <div class="designers-list-container">
-    <h2>Designers List</h2>
-    {% for designer in designers %}
-    <div class="designer-card">
-        {% if designer.img %}
-            <img src="{{ designer.img.url }}" alt="{{ designer.name }}">
-        {% endif %}
-        <div class="designer-details">
-            <div class="designer-name">{{ designer.name }}</div>
-            <div class="designer-bio">{{ designer.bio }}</div>
-            <div class="designer-contact">Contact: {{ designer.contact_info }}</div>
+    <h2>Interior Designers</h2>
+    <div class="designers-grid">
+        {% for designer in designers %}
+        <div class="designer-card">
+            {% if designer.img %}
+                <img src="{{ designer.img.url }}" alt="{{ designer.name }}">
+            {% endif %}
+            <div class="designer-details">
+                <div class="designer-name">{{ designer.name }}</div>
+                <div class="designer-bio">{{ designer.bio }}</div>
+                <div class="designer-contact">
+                    Contact: <a href="{{ designer.contact_info }}" target="_blank">{{ designer.contact_info }}</a>
+                </div>
+            </div>
         </div>
+        {% empty %}
+            <p>No designers available.</p>
+        {% endfor %}
     </div>
-    {% empty %}
-        <p>No designers available.</p>
-    {% endfor %}
 </div>
 {% endblock %}
+
+

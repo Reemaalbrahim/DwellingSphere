@@ -15,7 +15,7 @@ def add_service_view(request):
             img=img
         )
         new_service.save()
-        return redirect('repair:repair_list_view')  # Adjust to your URL name
+        return redirect('repairs:repair_list_view')  # Adjust to your URL name
 
     return render(request, 'repairs/add_service.html')
 

@@ -17,20 +17,30 @@
         padding: 20px;
     }
 
+    .services-grid {
+        display: flex;
+        flex-wrap: wrap; /* Allow wrapping to the next line */
+        justify-content: center; /* Center the cards */
+        width: 100%; /* Full width for the grid */
+    }
+
     .service-card {
-        background-color: #f2f2f2;
+        background-color: #abb8c4;
         color: #000;
         margin: 10px;
         padding: 20px;
         border-radius: 5px;
-        width: 80%;
+        width: calc(33.33% - 20px); /* Width for three cards in a row */
         max-width: 600px;
         display: flex;
         align-items: center;
+        box-sizing: border-box; /* Include padding and border in width */
     }
 
     .service-card img {
-        max-width: 100px;
+        width: 100px; /* Fixed width */
+        height: 120px; /* Fixed height */
+        object-fit: cover; /* Maintain aspect ratio and fill the box */
         border-radius: 5px;
         margin-right: 20px;
     }
@@ -47,23 +57,41 @@
     .service-description {
         margin-top: 10px;
     }
+
+    .service-contact {
+        margin-top: 10px; /* Space above contact info */
+    }
+
+    .service-contact a {
+        color: #2f3a42; /* Link color */
+        text-decoration: none; /* Remove underline */
+    }
+
+    .service-contact a:hover {
+        text-decoration: underline; /* Underline on hover */
+    }
 </style>
 
 <div class="services-list-container">
     <h2>Repair Services List</h2>
-    {% for service in services %}
-    <div class="service-card">
-        {% if service.img %}
-            <img src="{{ service.img.url }}" alt="{{ service.name }}">
-        {% endif %}
-        <div class="service-details">
-            <div class="service-name">{{ service.name }}</div>
-            <div class="service-description">{{ service.description }}</div>
-            <div class="service-contact">Contact: {{ service.contact_info }}</div>
+    <div class="services-grid">
+        {% for service in services %}
+        <div class="service-card">
+            {% if service.img %}
+                <img src="{{ service.img.url }}" alt="{{ service.name }}">
+            {% endif %}
+            <div class="service-details">
+                <div class="service-name">{{ service.name }}</div>
+                <div class="service-description">{{ service.description }}</div>
+                <div class="service-contact">
+                    Contact: <a href="tel:{{ service.contact_info }}">{{ service.contact_info }}</a>
+                </div>
+            </div>
         </div>
+        {% empty %}
+            <p>No repair services available.</p>
+        {% endfor %}
     </div>
-    {% empty %}
-        <p>No repair services available.</p>
-    {% endfor %}
 </div>
 {% endblock %}
+
