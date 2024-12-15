@@ -26,11 +26,14 @@ def signin_view(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
+        
         if user is not None:
             login(request, user)
+            messages.success(request, "You have successfully signed in!")
             return redirect('main_app:home_view')  # Redirect to home after successful login
         else:
-            messages.error(request, "Invalid username or password.")
+            messages.error(request, "Invalid username or password. You must register if you don't have an account.")
+    
     return render(request, 'main_app/sign_in.html')
 
 def signup_view(request):
@@ -46,11 +49,13 @@ def signup_view(request):
                 user.save()
                 messages.success(request, "Account created successfully! You can now sign in.")
                 return redirect('main_app:signin_view')
-            except:
+            except Exception:
                 messages.error(request, "Username already exists.")
         else:
             messages.error(request, "Passwords do not match.")
+    
     return render(request, 'main_app/sign_up.html')
+
 
 
 

@@ -6,7 +6,7 @@
 {% block content %}
 <style>
     body {
-        background-image: url('{% static "images/signup.png" %}'); /* Use the same background image */
+        background-image: url('{% static "images/signup.png" %}');
         background-size: cover;
         background-position: center;
         height: 100vh;
@@ -23,10 +23,10 @@
         margin-top: 100px;
         margin-bottom: 40px;
         color: #ccc;
-        display: flex; /* Use flexbox for centering */
-        flex-direction: column; /* Stack items vertically */
-        align-items: center; /* Center items horizontally */
-        text-align: center; /* Center text */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 
     .form-container h2 {
@@ -35,7 +35,7 @@
 
     .form-group {
         margin-bottom: 15px;
-        width: 100%; /* Ensure full width for the form group */
+        width: 100%;
     }
 
     .form-group label {
@@ -44,21 +44,21 @@
     }
 
     .form-group input {
-        width: 90%; /* Adjusted width for smaller fields */
-        padding: 8px; /* Slightly smaller padding */
+        width: 90%;
+        padding: 8px;
         border: 1px solid #ccc;
         border-radius: 4px;
     }
 
     .submit-button {
-        width: 80%; /* Adjusted width for a smaller button */
-        padding: 8px; /* Smaller padding */
+        width: 80%;
+        padding: 8px;
         background-color: #007bff;
         color: white;
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        margin-top: 10px; /* Add margin for spacing */
+        margin-top: 10px;
     }
 
     .submit-button:hover {
@@ -74,8 +74,10 @@
 
 <div class="form-container">
     <h2>Sign Up</h2>
-    {% if error_message %}
-        <div class="error-message">{{ error_message }}</div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="error-message">{{ message }}</div>
+        {% endfor %}
     {% endif %}
     <form method="POST">
         {% csrf_token %}
@@ -100,3 +102,4 @@
     <p>Already have an account? <a href="{% url 'main_app:signin_view' %}">Sign In</a></p>
 </div>
 {% endblock %}
+
