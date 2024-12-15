@@ -35,12 +35,17 @@
         display: flex;
         align-items: center;
         box-sizing: border-box; /* Include padding and border in width */
+        transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+    }
+
+    .designer-card:hover {
+        transform: scale(1.05); /* Scale up the card */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
     }
 
     .designer-card img {
         width: 130px; /* Fixed width for uniformity */
         height: 150px; /* Fixed height for uniformity */
-       
         margin-right: 20px;
     }
 
@@ -60,7 +65,7 @@
 
     .designer-contact {
         margin-top: 15px; /* Increased space above contact info */
-        color: #2f3a42
+        color: #2f3a42;
     }
 
     .designer-contact a {
@@ -70,6 +75,25 @@
 
     .designer-contact a:hover {
         text-decoration: underline; /* Underline on hover */
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .designer-card {
+            width: calc(50% - 20px); /* Two cards per row */
+        }
+    }
+
+    @media (max-width: 480px) {
+        .designer-card {
+            width: calc(100% - 20px); /* One card per row */
+            flex-direction: column; /* Stack image and details vertically */
+            align-items: center; /* Center align items */
+        }
+
+        .designer-card img {
+            margin: 0 0 10px 0; /* Margin below image */
+        }
     }
 </style>
 

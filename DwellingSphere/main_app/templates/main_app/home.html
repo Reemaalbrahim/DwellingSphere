@@ -101,6 +101,50 @@
         color: #e8ebed;
         font-size: 18px;
     }
+
+    /* Media Queries for responsiveness */
+    @media (max-width: 768px) {
+        .home-background {
+            padding: 150px; /* Adjust padding for smaller screens */
+            height: auto; /* Allow height to adjust */
+        }
+
+        .static-info {
+            margin-top: -100px; /* Adjust margin */
+        }
+
+        .services {
+            justify-content: center; /* Center items on smaller screens */
+        }
+
+        .service-box {
+            width: 60%; /* Make service boxes take more width */
+            margin: 10px 0; /* Center boxes */
+        }
+    }
+
+    @media (max-width: 480px) {
+        .static-info h2 {
+            font-size: 18px; /* Adjust font size */
+        }
+
+        .about-section h2 {
+            font-size: 20px; /* Adjust font size */
+        }
+
+        .about-section h4 {
+            font-size: 14px; /* Adjust font size */
+        }
+
+        .service-box img {
+            width: 100%; /* Set to 100% for responsiveness */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        .service-box h3 {
+            font-size: 16px; /* Adjust font size */
+        }
+    }
 </style>
 
 <div class="home-background">
@@ -110,7 +154,7 @@
     <a href="{% url 'homes:home_list' %}" class="explore-button">Explore more!</a>
 </div>
 
-<div class="about-section"id="about">
+<div class="about-section" id="about">
     <h2>About DwellingSphere</h2>
     <h4>At DwellingSphere, we believe that your home is more than just a place to live, it's a sanctuary where memories are made, dreams are nurtured, and life unfolds.</h4>
     <h4>Our mission is to connect you with the best resources to create, enhance, and maintain your ideal living space.</h4>
@@ -146,6 +190,7 @@
 </div>
 
 {% endblock %}
+
 
 
 

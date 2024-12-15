@@ -20,7 +20,6 @@
         flex-direction: column;
         align-items: center;
         padding: 40px;
-       
         border-radius: 10px; /* Rounded corners */
     }
 
@@ -111,6 +110,33 @@
         font-size: 0.9em; /* Smaller font for error messages */
         margin-top: 5px; /* Spacing above error messages */
     }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .contact-container {
+            padding: 20px; /* Reduce padding on smaller screens */
+        }
+
+        .contact-form {
+            padding: -10px; /* Reduce padding in the form */
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 90%; /* Full width on smaller screens */
+        }
+    }
+
+    @media (max-width: 480px) {
+        .contact-form h2 {
+            font-size: 1.5em; /* Smaller title font size */
+        }
+
+        .submit-button {
+            font-size: 16px; /* Smaller button font size */
+            padding: 10px 15px; /* Adjust button padding */
+        }
+    }
 </style>
 
 <div class="contact-container">
@@ -140,6 +166,7 @@
     </div>
 </div>
 {% endblock %}
+
 
 
 

@@ -25,7 +25,6 @@
         width: 100%; /* Full width for centering */
         margin-bottom: 20px; /* Space below the heading */
         text-align: center; /* Center text for cards */
-
     }
 
     .filter-container {
@@ -85,7 +84,6 @@
     .home-details h3 {
         margin: 0;
         color: aliceblue;
-        
     }
 
     .home-details p {
@@ -116,6 +114,30 @@
     .pagination a:hover {
         background-color: #686a6d;
         color: white;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .home-card {
+            width: calc(50% - 30px); /* Two cards per row */
+        }
+    }
+
+    @media (max-width: 480px) {
+        .home-card {
+            width: calc(100% - 30px); /* One card per row */
+        }
+
+        .filter-container {
+            flex-direction: column; /* Stack filter elements vertically */
+            align-items: center; /* Center filter elements */
+        }
+
+        .filter-container select,
+        .filter-container button {
+            margin: 10px 0; /* Space between filter elements */
+            width: 100%; /* Full width for filter elements */
+        }
     }
 </style>
 
@@ -169,7 +191,6 @@
     <span class="step-links">
         {% if page_obj.has_previous %}
             <a href="?page=1">1</a>
-         
         {% endif %}
 
         <span class="current">

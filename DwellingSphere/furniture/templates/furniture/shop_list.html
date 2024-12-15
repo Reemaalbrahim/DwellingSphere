@@ -35,6 +35,12 @@
         display: flex;
         align-items: center;
         box-sizing: border-box; /* Include padding and border in width */
+        transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+    }
+
+    .shop-card:hover {
+        transform: scale(1.05); /* Scale up the card */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
     }
 
     .shop-card img {
