@@ -16,6 +16,17 @@
         align-items: center;
         padding: 20px;
     }
+    .add-designer-button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        margin: 10px 0;
+    }
+    .add-designer-button:hover {
+        background-color: #0056b3;
+    }
 
     .designers-grid {
         display: flex;
@@ -99,6 +110,12 @@
 
 <div class="designers-list-container">
     <h2>Interior Designers</h2>
+    
+    {% if user.is_authenticated %}
+        {% if user.profile.role == 'designer' or user.profile.role == 'admin' %}
+            <a href="{% url 'designers:add_designer_view' %}" class="add-designer-button">Add New Designer</a>
+        {% endif %}
+    {% endif %}
     <div class="designers-grid">
         {% for designer in designers %}
         <div class="designer-card">

@@ -5,28 +5,36 @@
 
 {% block content %}
 <style>
-    body {
+     body {
         background-color: #abb8c4;
         display: flex;
-        flex-direction: column; /* Stack elements vertically */
+        flex-direction: column;
     }
-
     .home-list-container {
         padding: 20px;
         display: flex;
-        flex-wrap: wrap; /* Allows wrapping of cards */
-        justify-content: space-between; /* Space between cards */
-        align-items: flex-start; /* Align items at the top */
-        text-align: center; /* Center text for cards */
-        width: 100%; /* Full width for the home list */
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+        text-align: center;
+        width: 100%;
     }
-
     h2 {
-        width: 100%; /* Full width for centering */
-        margin-bottom: 20px; /* Space below the heading */
-        text-align: center; /* Center text for cards */
+        width: 100%;
+        margin-bottom: 20px;
+        text-align: center;
     }
-
+    .add-home-button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        margin: 10px 0;
+    }
+    .add-home-button:hover {
+        background-color: #0056b3;
+    }
     .filter-container {
         display: flex; /* Use flexbox for centering */
         justify-content: center; /* Center the filter elements */
@@ -142,6 +150,12 @@
 </style>
 
 <h2>Available Homes</h2>
+
+{% if user.is_authenticated %}
+    {% if user.profile.role == 'homebuyer' or user.profile.role == 'admin' %}
+        <a href="{% url 'homes:add_home' %}" class="add-home-button">Add New Home</a>
+    {% endif %}
+{% endif %}
 
 <div class="filter-container">
     <form method="GET" action="">

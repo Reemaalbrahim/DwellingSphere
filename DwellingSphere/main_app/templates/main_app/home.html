@@ -1,7 +1,6 @@
 {% extends 'main_app/base.html' %}
 
 {% block content %}
-
 <style>
     .home-background {
         background-image: url('/static/images/b.jpeg');
@@ -102,6 +101,95 @@
         font-size: 18px;
     }
 
+    /* New property section styles */
+    .property-section {
+        display: flex;
+        align-items: center; /* Align items vertically */
+        margin-top: 110px; /* Space above the section */
+        background-color: #2f3a42; /* Light background for contrast */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .property-section img {
+        width: 1000px; /* Fixed width for property image */
+        height: auto; /* Maintain aspect ratio */
+        border-radius: 10px;
+        margin-right: 20px; /* Space between image and text */
+    }
+
+    .property-details {
+        text-align: left; /* Align text to the left */
+    }
+
+    .property-details h3 {
+        margin: 0 0 10px; /* Space below the title */
+        color: #e8eff4; /* Title color */
+        text-align: center;
+    }
+
+    .property-details p {
+        margin: 5px 0; /* Space between paragraphs */
+        color: #e8eff4;
+        text-align: center;
+    }
+
+    .view-more-button {
+        display: inline-block; /* Make it inline-block to allow padding */
+        padding: 10px 20px; /* Padding for the button */
+        background-color: #c96e19c8; /* Button color */
+        color: white; /* Text color */
+        text-decoration: none; /* Remove underline */
+        border-radius: 5px; /* Rounded corners */
+        margin-top: 10px; /* Space above the button */
+        margin-left: 70px;
+        transition: background-color 0.3s; /* Transition effects */
+    }
+
+    .view-more-button:hover {
+        background-color: #0056b3; /* Darker color on hover */
+    }
+
+    /* User Feedback Section */
+    .user-feedback-section {
+        padding: 20px; /* Padding for the section */
+        border-radius: 10px; /* Rounded corners */
+        margin-top: 40px; /* Space above the section */
+    }
+
+    .user-feedback-section h2 {
+        color: #2f3a42; /* Heading color */
+        text-align: center; /* Center the heading */
+    }
+
+    .feedback {
+        display: flex; /* Use flexbox to align items horizontally */
+        justify-content: space-between; /* Space items evenly */
+        flex-wrap: wrap; /* Allow wrapping */
+    }
+
+    .feedback-item {
+        display: flex;
+        align-items: center; /* Center align avatar and content */
+        margin: 10px; /* Space between feedback items */
+        flex: 1 1 30%; /* Allow items to grow equally and take up to 30% of the row */
+        max-width: 30%; /* Set a maximum width for each item */
+    }
+
+    .feedback-item i {
+        font-size: 24px; /* Size of the avatar */
+        color: #c96e19c8; /* Avatar color */
+        margin-right: 10px; /* Space between avatar and text */
+    }
+
+    .feedback-content {
+        color: #2f3a42; /* Text color */
+        padding: 10px; /* Padding for feedback content */
+        border-radius: 5px; /* Rounded corners */
+        flex: 1; /* Allow content to take available space */
+    }
+
     /* Media Queries for responsiveness */
     @media (max-width: 768px) {
         .home-background {
@@ -121,34 +209,31 @@
             width: 60%; /* Make service boxes take more width */
             margin: 10px 0; /* Center boxes */
         }
-    }
 
-    @media (max-width: 480px) {
-        .static-info h2 {
-            font-size: 18px; /* Adjust font size */
+        .property-section {
+            flex-direction: column; /* Stack image and details on smaller screens */
+            align-items: center; /* Center align items */
         }
 
-        .about-section h2 {
-            font-size: 20px; /* Adjust font size */
+        .property-section img {
+            margin-right: 0; /* Remove right margin */
+            margin-bottom: 20px; /* Add bottom margin */
         }
 
-        .about-section h4 {
-            font-size: 14px; /* Adjust font size */
+        .feedback {
+            flex-direction: column; /* Stack feedback items vertically on small screens */
         }
 
-        .service-box img {
-            width: 100%; /* Set to 100% for responsiveness */
-            height: auto; /* Maintain aspect ratio */
-        }
-
-        .service-box h3 {
-            font-size: 16px; /* Adjust font size */
+        .feedback-item {
+            margin: 5px 0; /* Adjust margin for vertical stacking */
+            max-width: 100%; /* Allow full width on small screens */
         }
     }
 </style>
 
 <div class="home-background">
 </div>
+
 <div class="static-info">
     <h2>Your one-stop solution for all your dwelling needs</h2>
     <a href="{% url 'homes:home_list' %}" class="explore-button">Explore more!</a>
@@ -187,9 +272,99 @@
             </a>
         </div>
     </div>
-</div>
 
+    <!-- Property Section -->
+    <div class="property-section">
+        <div class="image-container">
+            <img src="/static/images/home.jpeg" alt="Villa" class="property-image" id="current-image">
+        </div>
+        <div class="property-details">
+            <h3>Albadriya Villa</h3>
+            <p>Discover your dream villa, a stunning oasis nestled in the picturesque region of Albadriya, Al-Ahsa, Saudi Arabia. This exquisite property offers a perfect blend of comfort and luxury. Experience the charm of this remarkable residence, 
+                where every detail is crafted for a refined living experience.</p>
+            <a href="{% url 'homes:home_list' %}" class="view-more-button">View More</a>
+        </div>
+    </div>
+
+    <script>
+        const images = [
+            '/static/images/home.jpeg',
+            '/static/images/home_1.jpeg',
+            '/static/images/home_2.jpg'
+        ];
+        let currentIndex = 0;
+
+        function changeImage(direction) {
+            currentIndex += direction;
+
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1; // Loop to last image
+            } else if (currentIndex >= images.length) {
+                currentIndex = 0; // Loop to first image
+            }
+
+            document.getElementById('current-image').src = images[currentIndex];
+        }
+
+        // Automatically change images every 2 seconds
+        setInterval(() => {
+            changeImage(1); // Move to the next image
+        }, 2000); // Change interval
+    </script>
+
+    <!-- User Feedback Section -->
+    <div class="user-feedback-section">
+        <h2>Share Your Experience</h2>
+        <div class="feedback">
+            <div class="feedback-item">
+                <i class="fa-solid fa-comment"></i>
+                <div class="feedback-content">
+                    <strong>Saud Fahad</strong>
+                    <p>This platform is fantastic! The service was exceptional.</p>
+                </div>
+            </div>
+            <div class="feedback-item">
+                <i class="fa-solid fa-comment"></i>
+                <div class="feedback-content">
+                    <strong>Haifa Sulaiman</strong>
+                    <p>I had a wonderful experience. Highly recommend to anyone looking for a new home!</p>
+                </div>
+            </div>
+            <div class="feedback-item">
+                <i class="fa-solid fa-comment"></i>
+                <div class="feedback-content">
+                    <strong>Faisal Abdulaziz</strong>
+                    <p>Highly recommend to anyone looking for home repair stuff!</p>
+                </div>
+            </div>
+            <div class="feedback-item">
+                <i class="fa-solid fa-comment"></i>
+                <div class="feedback-content">
+                    <strong>Abdullah Ibrahim</strong>
+                    <p>The team was very helpful in finding my perfect home. I couldn't be happier!</p>
+                </div>
+            </div>
+            <div class="feedback-item">
+                <i class="fa-solid fa-comment"></i>
+                <div class="feedback-content">
+                    <strong>Mona Hamad</strong>
+                    <p>Great service and friendly staff! They really care about their clients.</p>
+                </div>
+            </div>
+            <div class="feedback-item">
+                <i class="fa-solid fa-comment"></i>
+                <div class="feedback-content">
+                    <strong>Abdualrahman Saad</strong>
+                    <p>Fantastic experience from start to finish. Will definitely use them again!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
+
+
+
 
 
 

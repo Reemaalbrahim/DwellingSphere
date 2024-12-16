@@ -12,7 +12,6 @@
         height: 100vh;
         margin: 0;
     }
-
     .form-container {
         max-width: 400px;
         margin: auto;
@@ -28,28 +27,23 @@
         align-items: center;
         text-align: center;
     }
-
     .form-container h2 {
         margin-bottom: 20px;
     }
-
     .form-group {
         margin-bottom: 15px;
         width: 100%;
     }
-
     .form-group label {
         display: block;
         margin-bottom: 5px;
     }
-
-    .form-group input {
+    .form-group input, .form-group select {
         width: 90%;
         padding: 8px;
         border: 1px solid #ccc;
         border-radius: 4px;
     }
-
     .submit-button {
         width: 80%;
         padding: 8px;
@@ -60,11 +54,9 @@
         cursor: pointer;
         margin-top: 10px;
     }
-
     .submit-button:hover {
         background-color: #0056b3;
     }
-
     .error-message {
         color: red;
         font-size: 0.9em;
@@ -97,9 +89,20 @@
             <label for="confirm_password">Confirm Password</label>
             <input type="password" id="confirm_password" name="confirm_password" required>
         </div>
+        <div class="form-group">
+            <label for="role">Select Role:</label>
+            <select id="role" name="role" required>
+                <option value="homebuyer">Homebuyer</option>
+                <option value="designer">Designer</option>
+                <option value="repair_worker">Repair Worker</option>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+            </select>
+        </div>
         <button type="submit" class="submit-button">Sign Up</button>
     </form>
     <p>Already have an account? <a href="{% url 'main_app:signin_view' %}">Sign In</a></p>
 </div>
 {% endblock %}
+
 

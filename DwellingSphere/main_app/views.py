@@ -42,10 +42,12 @@ def signup_view(request):
         email = request.POST['email']
         password = request.POST['password']
         confirm_password = request.POST['confirm_password']
-        
+        role = request.POST['role']  # Get the user role
+
         if password == confirm_password:
             try:
                 user = User.objects.create_user(username=username, email=email, password=password)
+                user.profile.role = role  # Assuming you have a Profile model linked to User
                 user.save()
                 messages.success(request, "Account created successfully! You can now sign in.")
                 return redirect('main_app:signin_view')
@@ -53,7 +55,7 @@ def signup_view(request):
                 messages.error(request, "Username already exists.")
         else:
             messages.error(request, "Passwords do not match.")
-    
+
     return render(request, 'main_app/sign_up.html')
 
 
