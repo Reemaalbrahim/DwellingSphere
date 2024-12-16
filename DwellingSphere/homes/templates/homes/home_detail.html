@@ -12,36 +12,48 @@
         padding: 20px; /* Add padding for better spacing */
     }
 
-    .home-list-container {
-        display: flex;
-        justify-content: center; /* Center the card */
-        align-items: center; /* Align items at the center */
-        width: 100%; /* Full width for the container */
-    }
-
     .home-card {
-        background-color: rgb(217, 219, 224);
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 15px;
+        padding: 0px;
         margin: 10px; /* Margin around the card */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        width: 500px; /* Increased width for larger cards */
-        height: 550px;
+        width: 700px; /* Width for the card */
+        height: auto; /* Adjust height automatically */
         box-sizing: border-box; /* Include padding and border in width */
         text-align: center; /* Center text inside the card */
+        margin-left: 300px;
     }
 
-    .home-card img {
-        width: 100%; /* Set width to 100% to fill the card */
-        height: 300px; /* Increased height for uniformity */
+    .home-card img.large {
+        width: 170%; /* Set width to 100% to fill the card */
+        height: 400px; /* Increased height for the large image */
         object-fit: cover; /* Maintain aspect ratio and cover the area */
         border-radius: 5px;
         margin-bottom: 15px; /* Space below the image */
+        margin-left: -260px;
+    }
+
+    .small-images {
+        display: flex;
+        justify-content: center; /* Center the small images */
+        margin-top: 10px; /* Space above the small images */
+    }
+
+    .small-images img {
+        width: 110px; /* Width for small images */
+        height: 75px; /* Height for small images */
+        object-fit: cover; /* Maintain aspect ratio */
+        border-radius: 5px;
+        margin: 0 5px; /* Space between small images */
+        cursor: pointer; /* Change cursor to pointer */
+        transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for hover effects */
+    }
+
+    .small-images img:hover {
+        transform: scale(1.05); /* Scale up the image slightly */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
     }
 
     .home-details {
-        margin-top: 10px;
+        margin-top: 30px;
     }
 
     .home-details h3 {
@@ -51,25 +63,52 @@
     .home-details p {
         margin: 5px 0; /* Space between paragraphs */
     }
+
+    .contact-button {
+        display: inline-block;
+        color: rgb(0, 0, 0); /* White text */
+        padding: 10px 15px; /* Padding for the button */
+        border: none; /* No border */
+        border-radius: 5px; /* Rounded corners */
+        text-decoration: none; /* Remove underline */
+        cursor: pointer; /* Pointer cursor */
+        margin-top: -10px; /* Space above the button */
+    }
+
+    .contact-button:hover {
+        background-color: #33333346; /* Darker shade on hover */
+    }
 </style>
 
-<div class="home-list-container">
-    <div class="home-card">
-        {% if home.img %}
-            <img src="{{ home.img.url }}" alt="{{ home.title }}">
-        {% endif %}
-        <div class="home-details">
-            <h3>{{ home.title }}</h3>
-            <p><strong>Price:</strong> ${{ home.price }}</p>
-            <p><strong>Location:</strong> {{ home.location }}</p>
-            <p><strong>Size:</strong> {{ home.size }} sq ft</p>
-            <p><strong>Bedrooms:</strong> {{ home.bedrooms }}</p>
-            <p><strong>Bathrooms:</strong> {{ home.bathrooms }}</p>
-            <p><strong>Contact:</strong> {{ home.contact }}</p>
-        </div>
+<div class="home-card">
+    {% if home.img %}
+        <img class="large" src="{{ home.img.url }}" alt="{{ home.title }}" id="mainImage">
+    {% endif %}
+    <div class="small-images">
+        <img src="{{ home.img.url }}" alt="Main image" onclick="changeMainImage('{{ home.img.url }}')">
+        <img src="{% static 'images/1.1.jpg' %}" alt="Small image 1" onclick="changeMainImage('{% static 'images/1.1.jpg' %}')">
+        <img src="{% static 'images/2.2.jpg' %}" alt="Small image 2" onclick="changeMainImage('{% static 'images/2.2.jpg' %}')">
+        <img src="{% static 'images/3.3.jpg' %}" alt="Small image 3" onclick="changeMainImage('{% static 'images/3.3.jpg' %}')">
+    </div>
+    <div class="home-details">
+        <h3>{{ home.title }}</h3>
+        <p><strong>Price:</strong> ${{ home.price }}</p>
+        <p><strong>Location:</strong> {{ home.location }}</p>
+        <p><strong>Size:</strong> {{ home.size }} sq ft</p>
+        <p><strong>Bedrooms:</strong> {{ home.bedrooms }}</p>
+        <p><strong>Bathrooms:</strong> {{ home.bathrooms }}</p>
+        <a href="tel:{{ home.contact }}" class="contact-button"><p><strong>For contact:</strong> Call {{ home.contact }}</a>
     </div>
 </div>
+
+<script>
+    function changeMainImage(src) {
+        document.getElementById('mainImage').src = src;
+    }
+</script>
 {% endblock %}
+
+
 
 
 
