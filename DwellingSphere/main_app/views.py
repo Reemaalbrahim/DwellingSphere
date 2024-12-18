@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import ContactForm
@@ -57,6 +57,12 @@ def signup_view(request):
             messages.error(request, "Passwords do not match.")
 
     return render(request, 'main_app/sign_up.html')
+
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('main_app:home_view')  # Redirect to home or any other page
 
 
 

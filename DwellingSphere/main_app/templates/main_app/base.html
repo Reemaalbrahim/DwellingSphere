@@ -25,7 +25,11 @@
             </div>
             <a href="{% url 'designers:designers_list_view' %}">Designers</a>
             <a href="{% url 'main_app:contact_view' %}">Contact Us</a>
-            <a href="{% url 'main_app:signin_view' %}">Login</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'main_app:logout_view' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'main_app:signin_view' %}">Login</a>
+            {% endif %}
        
         </nav>
     </header>

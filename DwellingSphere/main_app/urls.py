@@ -9,4 +9,5 @@ urlpatterns = [
     path('contact/success/', views.contact_success_view, name='contact_success_view'),
     path('signin/', views.signin_view, name='signin_view'),  # Sign In page
     path('signup/', views.signup_view, name='signup_view'),  # Sign Up page
+    path('logout/', views.logout_view, name='logout_view'),
 ]
