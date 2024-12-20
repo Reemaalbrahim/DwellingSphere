@@ -27,6 +27,10 @@ SECRET_KEY = 'django-insecure-!bgx6)514%)xdu96ag!xyt&h$v$qmc1bo7enu8pn3*1h15-pv(
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1',
+    'https://dwellingsphere.up.railway.app',
+]
 
 
 
