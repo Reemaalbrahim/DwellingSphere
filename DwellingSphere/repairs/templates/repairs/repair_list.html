@@ -77,6 +77,26 @@
     .service-contact a:hover {
         text-decoration: underline; /* Underline on hover */
     }
+
+    /* Media query for smaller screens */
+    @media (max-width: 768px) {
+        .service-card {
+            width: calc(100% - 20px); /* Full width minus margins */
+        }
+
+        .service-card img {
+            width: 100px; /* Adjust image size for smaller screens */
+            height: 120px;
+        }
+
+        .service-name {
+            font-size: 1.2em; /* Slightly smaller font for titles */
+        }
+
+        .service-contact a {
+            font-size: 0.9em; /* Smaller font size for contact info */
+        }
+    }
 </style>
 
 <div class="services-list-container">

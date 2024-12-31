@@ -8,48 +8,49 @@
     body {
         background-color: #abb8c4;
         display: flex;
-        flex-direction: column; /* Stack elements vertically */
-        padding: 20px; /* Add padding for better spacing */
+        flex-direction: column;
+        padding: 20px;
     }
 
     .home-card {
         padding: 0px;
-        margin: 10px; /* Margin around the card */
-        width: 700px; /* Width for the card */
-        height: auto; /* Adjust height automatically */
-        box-sizing: border-box; /* Include padding and border in width */
-        text-align: center; /* Center text inside the card */
-        margin-left: 300px;
+        margin: 10px auto; /* Center the card horizontally */
+        width: 90%; /* Default width for smaller screens */
+        max-width: 700px; /* Limit maximum width for larger screens */
+        height: auto;
+        box-sizing: border-box;
+        text-align: center;
     }
 
     .home-card img.large {
-        width: 170%; /* Set width to 100% to fill the card */
-        height: 400px; /* Increased height for the large image */
-        object-fit: cover; /* Maintain aspect ratio and cover the area */
+        width: 100%; /* Make the large image responsive */
+        height: auto; /* Maintain aspect ratio */
+        object-fit: cover;
         border-radius: 5px;
-        margin-bottom: 15px; /* Space below the image */
-        margin-left: -260px;
+        margin-bottom: 15px;
     }
 
     .small-images {
         display: flex;
-        justify-content: center; /* Center the small images */
-        margin-top: 10px; /* Space above the small images */
+        justify-content: center;
+        margin-top: 10px;
+        flex-wrap: wrap; /* Allow small images to wrap on smaller screens */
     }
 
     .small-images img {
-        width: 110px; /* Width for small images */
-        height: 75px; /* Height for small images */
-        object-fit: cover; /* Maintain aspect ratio */
+        width: 20%; /* Make small images responsive */
+        max-width: 110px; /* Maintain the maximum width for larger screens */
+        height: auto; /* Maintain aspect ratio */
+        object-fit: cover;
         border-radius: 5px;
-        margin: 0 5px; /* Space between small images */
-        cursor: pointer; /* Change cursor to pointer */
-        transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for hover effects */
+        margin: 5px; /* Add spacing between images */
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .small-images img:hover {
-        transform: scale(1.05); /* Scale up the image slightly */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
     .home-details {
@@ -57,26 +58,42 @@
     }
 
     .home-details h3 {
-        margin: 0; /* Remove margin for consistency */
+        margin: 0;
     }
 
     .home-details p {
-        margin: 5px 0; /* Space between paragraphs */
+        margin: 5px 0;
     }
 
     .contact-button {
         display: inline-block;
-        color: rgb(0, 0, 0); /* White text */
-        padding: 10px 15px; /* Padding for the button */
-        border: none; /* No border */
-        border-radius: 5px; /* Rounded corners */
-        text-decoration: none; /* Remove underline */
-        cursor: pointer; /* Pointer cursor */
-        margin-top: -10px; /* Space above the button */
+        color: rgb(0, 0, 0);
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+        margin-top: -10px;
     }
 
     .contact-button:hover {
-        background-color: #33333346; /* Darker shade on hover */
+        background-color: #33333346;
+    }
+
+    /* Media query for smaller screens */
+    @media (max-width: 768px) {
+        .home-card {
+            width: 100%; /* Use full width for smaller screens */
+            margin: 0 auto; /* Center align the card */
+        }
+
+        .small-images img {
+            width: 24%; /* Adjust width for smaller screens */
+        }
+
+        .contact-button {
+            font-size: 14px; /* Reduce button font size on smaller screens */
+        }
     }
 </style>
 
@@ -107,6 +124,7 @@
     }
 </script>
 {% endblock %}
+
 
 
 
