@@ -15,38 +15,46 @@
         flex-direction: column;
         align-items: center;
         padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 2em;
     }
 
     .shops-grid {
         display: flex;
-        flex-wrap: wrap; /* Allow wrapping to the next line */
-        justify-content: center; /* Center the cards */
-        width: 100%; /* Full width for the grid */
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
     }
 
     .shop-card {
-        background-color: #abb8c4;
+        background-color: #fff;
         color: #000;
         margin: 10px;
         padding: 20px;
-        border-radius: 5px;
-        width: calc(50% - 20px); /* Width for two cards in a row */
+        border-radius: 10px;
+        width: calc(50% - 20px);
         max-width: 600px;
         display: flex;
-        align-items: center;
-        box-sizing: border-box; /* Include padding and border in width */
-        transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+        align-items: flex-start;
+        box-sizing: border-box;
+        transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .shop-card:hover {
-        transform: scale(1.05); /* Scale up the card */
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
 
     .shop-card img {
-        width: 150px; /* Fixed width */
-        height: 150px; /* Fixed height */
-        object-fit: cover; /* Maintain aspect ratio and fill the box */
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
         border-radius: 5px;
         margin-right: 20px;
     }
@@ -56,25 +64,78 @@
     }
 
     .shop-name {
-        font-size: 1.5em;
+        font-size: 1.3em;
         font-weight: bold;
+        margin-bottom: 10px;
     }
 
     .shop-description {
-        margin-top: 10px;
+        margin-bottom: 15px;
+        font-size: 0.9em;
     }
 
     .shop-contact {
-        margin-top: 20px; /* Increased space above contact info */
+        margin-top: 15px;
     }
 
     .shop-contact a {
-        color: #2f3a42; /* Link color */
-        text-decoration: none; /* Remove underline */
+        color: #2f3a42;
+        text-decoration: none;
+        font-weight: bold;
     }
 
     .shop-contact a:hover {
-        text-decoration: underline; /* Underline on hover */
+        text-decoration: underline;
+    }
+
+    @media (max-width: 1024px) {
+        .shop-card {
+            width: calc(100% - 20px);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .shop-card {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .shop-card img {
+            margin-right: 0;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .shops-list-container {
+            padding: 10px;
+        }
+
+        h2 {
+            font-size: 1.5em;
+        }
+
+        .shop-card {
+            padding: 15px;
+        }
+
+        .shop-card img {
+            width: 120px;
+            height: 120px;
+        }
+
+        .shop-name {
+            font-size: 1.2em;
+        }
+
+        .shop-description {
+            font-size: 0.85em;
+        }
     }
 </style>
 

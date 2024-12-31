@@ -15,95 +15,147 @@
         flex-direction: column;
         align-items: center;
         padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
     }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 2em;
+    }
+
     .add-designer-button {
         background-color: #007bff;
         color: white;
         padding: 10px 20px;
         border-radius: 5px;
         text-decoration: none;
-        margin: 10px 0;
+        margin: 20px 0;
+        display: inline-block;
+        transition: background-color 0.3s;
     }
+
     .add-designer-button:hover {
         background-color: #0056b3;
     }
 
     .designers-grid {
         display: flex;
-        flex-wrap: wrap; /* Allow wrapping to the next line */
-        justify-content: center; /* Center the cards */
-        width: 100%; /* Full width for the grid */
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
     }
 
     .designer-card {
-        background-color: #343b4252;
-        color: #343b42c5;
+        background-color: #ffffff;
+        color: #343b42;
         margin: 10px;
         padding: 20px;
-        border-radius: 5px;
-        width: calc(33% - 20px); /* Width for three cards in a row */
-        max-width: 600px;
+        border-radius: 10px;
+        width: calc(33.33% - 20px);
+        max-width: 400px;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        box-sizing: border-box; /* Include padding and border in width */
-        transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+        box-sizing: border-box;
+        transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .designer-card:hover {
-        transform: scale(1.05); /* Scale up the card */
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
 
     .designer-card img {
-        width: 130px; /* Fixed width for uniformity */
-        height: 150px; /* Fixed height for uniformity */
-        margin-right: 20px;
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 15px;
     }
 
     .designer-details {
-        flex-grow: 1;
+        text-align: center;
+        width: 100%;
     }
 
     .designer-name {
-        font-size: 1.5em;
+        font-size: 1.3em;
         font-weight: bold;
         color: #2f3a42;
+        margin-bottom: 10px;
     }
 
     .designer-bio {
-        margin-top: 10px;
+        margin-bottom: 15px;
+        font-size: 0.9em;
     }
 
     .designer-contact {
-        margin-top: 15px; /* Increased space above contact info */
-        color: #2f3a42;
+        margin-top: 15px;
     }
 
     .designer-contact a {
-        color: #2f3a42; /* Link color */
-        text-decoration: none; /* Remove underline */
+        color: #007bff;
+        text-decoration: none;
+        font-weight: bold;
     }
 
     .designer-contact a:hover {
-        text-decoration: underline; /* Underline on hover */
+        text-decoration: underline;
     }
 
-    /* Responsive styles */
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
         .designer-card {
-            width: calc(50% - 20px); /* Two cards per row */
+            width: calc(50% - 20px);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .designers-list-container {
+            padding: 15px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+        }
+
+        .designer-card {
+            width: calc(100% - 20px);
+            max-width: none;
         }
     }
 
     @media (max-width: 480px) {
+        .designers-list-container {
+            padding: 10px;
+        }
+
+        h2 {
+            font-size: 1.5em;
+        }
+
+        .add-designer-button {
+            padding: 8px 16px;
+            font-size: 0.9em;
+        }
+
         .designer-card {
-            width: calc(100% - 20px); /* One card per row */
-            flex-direction: column; /* Stack image and details vertically */
-            align-items: center; /* Center align items */
+            padding: 15px;
         }
 
         .designer-card img {
-            margin: 0 0 10px 0; /* Margin below image */
+            width: 120px;
+            height: 120px;
+        }
+
+        .designer-name {
+            font-size: 1.2em;
+        }
+
+        .designer-bio {
+            font-size: 0.85em;
         }
     }
 </style>
@@ -116,6 +168,7 @@
             <a href="{% url 'designers:add_designer_view' %}" class="add-designer-button">Add New Designer</a>
         {% endif %}
     {% endif %}
+
     <div class="designers-grid">
         {% for designer in designers %}
         <div class="designer-card">
@@ -126,7 +179,7 @@
                 <div class="designer-name">{{ designer.name }}</div>
                 <div class="designer-bio">{{ designer.bio }}</div>
                 <div class="designer-contact">
-                    Contact: <a href="{{ designer.contact_info }}" target="_blank">{{ designer.contact_info }}</a>
+                    <a href="{{ designer.contact_info }}" target="_blank">Contact Designer</a>
                 </div>
             </div>
         </div>

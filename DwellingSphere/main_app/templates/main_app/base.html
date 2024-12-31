@@ -6,6 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <title>{% block title %}DwellingSphere{% endblock %}</title>
+    <style>
+        /* Responsive styles */
+        /* Responsive styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.hamburger {
+    display: none; /* Hidden by default */
+    flex-direction: column; /* Stack lines vertically */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.line {
+    height: 3px;
+    width: 25px;
+    background-color: #000000;
+    margin: 3px 0; /* Space between lines */
+}
+
+nav {
+    display: flex; /* Default to flex for larger screens */
+}
+
+@media (max-width: 768px) {
+    #nav-menu {
+        display: none; /* Hide nav by default on mobile */
+        flex-direction: column;
+        width: 100%; /* Full width */
+        background-color: #abb8c4; /* Background color */
+        position: absolute; /* Position absolute */
+        top: 80px; /* Adjust based on header height */
+        left: 0; /* Align to the left */
+        z-index: 1000; /* Ensure it appears above other elements */
+    }
+
+
+    .hamburger {
+        display: flex; /* Show hamburger on mobile */
+    }
+}
+
+    </style>
 </head>
 <body>
     <header>
@@ -14,7 +62,13 @@
                 <img src="{% static 'images/logo.png' %}" alt="DwellingSphere Logo" style="height: 90px;">
             </a>
         </h1>
-        <nav>
+        <div class="hamburger" id="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        
+        <nav id="nav-menu">
             <a href="{% url 'main_app:home_view' %}#about">About</a>
             <div>
                 <a href="{% url 'homes:home_list' %}">Homes</a>
@@ -30,7 +84,6 @@
             {% else %}
                 <a href="{% url 'main_app:signin_view' %}">Login</a>
             {% endif %}
-       
         </nav>
     </header>
     <main>
@@ -39,6 +92,49 @@
     <footer>
         <p>&copy; 2024 DwellingSphere. All rights reserved.</p>
     </footer>
+<script>
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
+
+// Toggle the navigation menu when the hamburger is clicked
+hamburger.addEventListener('click', () => {
+    // Toggle the display between 'none' and 'flex' on each click
+    if (navMenu.style.display === 'flex') {
+        navMenu.style.display = 'none'; // Hide the nav menu if it's currently displayed
+    } else {
+        navMenu.style.display = 'flex'; // Show the nav menu if it's currently hidden
+        navMenu.style.flexDirection = 'column'; // Ensure items are stacked vertically
+    }
+});
+
+// Close the navigation menu when clicking outside of it
+document.addEventListener('click', (event) => {
+    if (!navMenu.contains(event.target) && !hamburger.contains(event.target)) {
+        navMenu.style.display = 'none'; // Hide the nav menu
+    }
+});
+
+// Close the nav menu when clicking on any link inside it
+const links = navMenu.querySelectorAll('a'); // Select all links in the nav menu
+links.forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.style.display = 'none'; // Hide the nav menu when a link is clicked
+    });
+});
+
+// Reset the navigation menu when switching to a larger screen (PC view)
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+        navMenu.style.display = 'flex'; // Ensure the nav is displayed correctly on larger screens
+        navMenu.style.flexDirection = 'row'; // Ensure items are aligned horizontally on PC view
+    } else {
+        navMenu.style.display = 'none'; // Hide the nav menu on mobile by default
+    }
+});
+
+
+
+</script>
 </body>
 </html>
 
